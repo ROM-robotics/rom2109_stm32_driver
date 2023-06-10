@@ -1,0 +1,8 @@
+./*/*/DebugConfig
+./*/*/Listings
+./*/*/Objects
+./*/*/RTE
+Workspace/stm32f103_ROM_robot_controller/DebugConfig/*
+Workspace/stm32f103_ROM_robot_controller/Listings/*
+Workspace/stm32f103_ROM_robot_controller/Objects/*
+Workspace/stm32f103_ROM_robot_controller/RTE/*
