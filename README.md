@@ -20,3 +20,6 @@ timer2 -> motor A encoder<br>
 # rom2109_stm32_driver
 
 ##### computer မှ velocity ပို့ ရင် L R +CR တွဲပို့ပါ။
+
+
+<a href="https://www.youtube.com/watch?v=qeWIGDeaKrE"> pid tuning လုပ်ရန် </a>
