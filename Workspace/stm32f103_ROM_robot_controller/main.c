@@ -150,7 +150,7 @@ void variablesInit(void)
 	// change for your robot ( uints meter, radian )
 	//base_width       = 0.205;
 	//wheel_diameter   = 0.070;
-	//pulse_per_revolute = 6533;
+	pulse_per_revolute = 6533;
 	//L_by_2 = base_width/2.0;
 	
 	// tune your pid
@@ -170,8 +170,8 @@ void variablesInit(void)
 	right_actual_rpm=0;				
 	left_actual_rpm=0;	
 	
-	//pulse_per_50ms_to_rpm = 0.0;  
-	//pulse_per_50ms_to_rpm = 60000.0 / (SAMPLE_TIME_mS * pulse_per_revolute);
+	pulse_per_50ms_to_rpm = 0.0;  
+	pulse_per_50ms_to_rpm = 60000.0 / (SAMPLE_TIME_mS * pulse_per_revolute);
 	
 	//meter_per_sec_to_rpm = 60.0/ (pi * wheel_diameter);
 	

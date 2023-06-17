@@ -26,8 +26,8 @@ void updatePID_right( int32_t desire, int32_t actual )
 	if( new_pwm > 7199 )   { new_pwm=7199; }
 	else if( new_pwm <= 0 ) { new_pwm=0; }
 	
-	if( desire < 0 )			{ INB1=0; INB2=1; } 			// backward
-  else if( desire > 0 )	{ INB1=1; INB2=0; } 		 	// default forward
+	if( desire < 0 )			{ INB1=1; INB2=0; } 			// backward
+  else if( desire > 0 )	{ INB1=0; INB2=1; } 		 	// default forward
 	else									{ INB1=0; INB2=0; Set_MotorD_PWM(0); }
 	
 	Set_MotorD_PWM( abs(new_pwm) );
@@ -56,8 +56,8 @@ void updatePID_left( int32_t desire, int32_t actual )
 	if( new_pwm > 7199 )   { new_pwm=7199; }
 	else if( new_pwm <= 0 ) { new_pwm=0; }
 
-	if( desire < 0 )			{ INA1=0; INA2=1; } 			// backward
-  else if( desire > 0 )	{ INA1=1; INA2=0; } 		 	// default forward
+	if( desire < 0 )			{ INA1=1; INA2=0; } 			// backward
+  else if( desire > 0 )	{ INA1=0; INA2=1; } 		 	// default forward
 	else 									{ INA1=0; INA2=0; Set_MotorC_PWM(0);	} 	
 	
 	Set_MotorC_PWM( abs(new_pwm) );

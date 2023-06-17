@@ -5,7 +5,7 @@
 #include "encoder.h"
 
 volatile uint64_t B_count=0;    
-volatile uint64_t A_count=0;
+volatile uint64_t C_count=0;
 
 //=============================================================== RPM calculation
 /*
@@ -64,30 +64,30 @@ int32_t getMotorB_rpm()
 
 int32_t getMotorC_rpm()
 {
-	A_count = TIM4->CNT; 
-	static int32_t A_prev_count=0;
-	int16_t A_count_diff=0;	
+	C_count = TIM4->CNT; 
+	static int32_t C_prev_count=0;
+	int16_t C_count_diff=0;	
 	int16_t actual_rpm=0;
 	int8_t direction_bit = 1;
 	
 	if( TIM4->CR1 & TIM_CR1_DIR )												// if reverse
 	{
-		A_count_diff = A_prev_count - A_count;
-		if( A_count_diff < 0 ) { A_count_diff += 65536; }
+		C_count_diff = C_prev_count - C_count;
+		if( C_count_diff < 0 ) { C_count_diff += 65536; }
 		direction_bit = -1;
 	}
 	else
 	{
-		 A_count_diff = A_count - A_prev_count;
-		 if(A_count_diff < 0) { A_count_diff += 65536; }  // forward counter overflow
+		 C_count_diff = C_count - C_prev_count;
+		 if(C_count_diff < 0) { C_count_diff += 65536; }  // forward counter overflow
 	}
 	/* -----------------------ROS2 CONTROL---------------------------- */
-	global_C_count += (A_count_diff * direction_bit);
+	global_C_count += (C_count_diff * (-direction_bit));
 	/* --------------------END ROS2 CONTROL--------------------------- */ 
-	A_prev_count = A_count;
+	C_prev_count = C_count;
 	//actual_rpm = ( A_count_diff * 10 ) / ( 11 );        // FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr 
-	actual_rpm = A_count_diff * pulse_per_50ms_to_rpm;
-	return actual_rpm * direction_bit;
+	actual_rpm = C_count_diff * pulse_per_50ms_to_rpm;
+	return actual_rpm * direction_bit * -1;
 }
 
 int32_t getMotorD_rpm()
@@ -110,12 +110,12 @@ int32_t getMotorD_rpm()
 		if( B_count_diff < 0 ) { B_count_diff += 65536; }  	// forward counter overflow
 	}
 	/* -----------------------ROS2 CONTROL---------------------------- */
-	global_D_count += (B_count_diff * direction_bit);
+	global_D_count += (B_count_diff * (-direction_bit));
 	/* --------------------END ROS2 CONTROL--------------------------- */ 
 	B_prev_count = B_count;
 	//actual_rpm = ( B_count_diff * 10 ) / ( 11 );        	// FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr  
 	actual_rpm = B_count_diff * pulse_per_50ms_to_rpm;
-	return actual_rpm * direction_bit;
+	return actual_rpm * direction_bit * -1;
 }
 
 //=============================================================== Encoder Initialize
