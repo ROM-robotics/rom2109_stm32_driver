@@ -59,9 +59,9 @@ extern float x_pos;
 extern float y_pos;
 
 extern long l_ticks; extern long r_ticks;
-extern int l_speed; extern int r_speed;
+//extern int l_speed; extern int r_speed;
 
 /* ROS2 CONTROL */
-extern long global_A_count; // Motor C
-extern long global_B_count; // Motor D
+extern long global_C_count; // Motor C
+extern long global_D_count; // Motor D
 #endif

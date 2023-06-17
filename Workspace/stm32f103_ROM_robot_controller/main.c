@@ -34,11 +34,11 @@ int main(void)
 /*  FUNCTION IMPLEMENTS  */
 void sendData(void)
 {
-		l_ticks = l_speed; r_ticks= r_speed;
+		l_ticks = global_C_count; r_ticks= global_D_count;
 	
 		/* ROS2 CONTROL 
-		global_A_count; // Motor C
-		global_B_count; // Motor D
+		global_C_count; // Motor C
+		global_D_count; // Motor D
 		*/
 	
 	//--------------------------------------------------------------------------------------------
@@ -125,10 +125,10 @@ void getDesireRPM(void)
 				char* pend;
 				char* pend2;
 				char* pend3;
-				float l_ = strtof( new_str, &pend); 
-				float r_ = strtof( pend, NULL);
-				l_speed = (int) l_;
-				r_speed = (int) r_;
+				left_desire_rpm = (int)( strtof( new_str, &pend) ); 
+				right_desire_rpm = (int) ( strtof( pend, NULL) );
+				//l_speed = (int) l_desire;
+				//r_speed = (int) r_desire;
 				//shutdown_request = strtof(pend2, &pend3);
 				//if(shutdown_request > 0.0) { x_pos=0.0; y_pos=0.0; theta=0.0; }//ResetRobotController(); };
 				Rx_strLength &= 0x0fff;  // reset flag

@@ -56,9 +56,9 @@ float x_pos;
 float y_pos;
 
 long l_ticks; long r_ticks;
-int l_speed; int r_speed;
+//int l_speed; int r_speed;
 
 /* ROS2 CONTROL */
-long global_A_count;	// Motor C
-long global_B_count; // Motor D
+long global_C_count;	// Motor C
+long global_D_count; // Motor D
 #endif

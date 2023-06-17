@@ -82,7 +82,7 @@ int32_t getMotorC_rpm()
 		 if(A_count_diff < 0) { A_count_diff += 65536; }  // forward counter overflow
 	}
 	/* -----------------------ROS2 CONTROL---------------------------- */
-	global_A_count += (A_count_diff * direction_bit);
+	global_C_count += (A_count_diff * direction_bit);
 	/* --------------------END ROS2 CONTROL--------------------------- */ 
 	A_prev_count = A_count;
 	//actual_rpm = ( A_count_diff * 10 ) / ( 11 );        // FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr 
@@ -110,7 +110,7 @@ int32_t getMotorD_rpm()
 		if( B_count_diff < 0 ) { B_count_diff += 65536; }  	// forward counter overflow
 	}
 	/* -----------------------ROS2 CONTROL---------------------------- */
-	global_B_count += (B_count_diff * direction_bit);
+	global_D_count += (B_count_diff * direction_bit);
 	/* --------------------END ROS2 CONTROL--------------------------- */ 
 	B_prev_count = B_count;
 	//actual_rpm = ( B_count_diff * 10 ) / ( 11 );        	// FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr  
