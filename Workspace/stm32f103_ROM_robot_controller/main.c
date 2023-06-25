@@ -26,7 +26,7 @@ int main(void)
 		#ifdef PID_TUNE
 			right_desire_rpm = setpoint; left_desire_rpm = setpoint;
 		#endif
-		getDesireRPM();
+		//getDesireRPM();
 	}
 	
 }
@@ -35,7 +35,6 @@ int main(void)
 void sendData(void)
 {
 		l_ticks = global_C_count; r_ticks= global_D_count;
-	
 		/* ROS2 CONTROL 
 		global_C_count; // Motor C
 		global_D_count; // Motor D
@@ -102,6 +101,9 @@ void updateMotor(void)
 {		
 	 left_actual_rpm= getMotorC_rpm(); // left
 	 right_actual_rpm= getMotorD_rpm(); // right
+	
+	 getDesireRPM();
+	
 	 updatePID_right( right_desire_rpm, right_actual_rpm );
 	 updatePID_left( left_desire_rpm, left_actual_rpm );
 	
@@ -111,34 +113,39 @@ void updateMotor(void)
 
 void getDesireRPM(void)
 {
+	left_desire_rpm=0; right_desire_rpm=0;
 		// get desire rpm-------------------------------------------------------------------------------------
 		
 			if( Rx_strLength > 0xC000) // usart rx DMA flag 
 			{
 				int16_t str_len = Rx_strLength & 0x00ff;
-				char new_str[str_len];  // malloc vs size who speed fast?
 				
-				for(int j=0; j<str_len;j++)
-				{
-					new_str[j] = (char) Received_Rx_Buf[j];
-				}
-				char* pend;
-				char* pend2;
-				char* pend3;
-				left_desire_rpm = (int)( strtof( new_str, &pend) ); 
-				right_desire_rpm = (int) ( strtof( pend, NULL) );
-				//l_speed = (int) l_desire;
-				//r_speed = (int) r_desire;
-				//shutdown_request = strtof(pend2, &pend3);
-				//if(shutdown_request > 0.0) { x_pos=0.0; y_pos=0.0; theta=0.0; }//ResetRobotController(); };
-				Rx_strLength &= 0x0fff;  // reset flag
-				//twist_to_motors();
 				
-				#ifdef TRACE_DEBUG
-					//printf("linear_x=%f, angular_z=%f \r\n", lin_x, ang_z);
-					printf("right=%d, left=%d \r\n", right_desire_rpm, left_desire_rpm);
-				#endif
+					char new_str[str_len];  // malloc vs size who speed fast?
+				
+					for(int j=0; j<str_len;j++)
+					{
+						new_str[j] = (char) Received_Rx_Buf[j];
+					}
+					char* pend;
+					char* pend2;
+					char* pend3;
+					left_desire_rpm = (int)( strtof( new_str, &pend) ); 
+					right_desire_rpm = (int) ( strtof( pend, NULL) );
+					//l_speed = (int) l_desire;
+					//r_speed = (int) r_desire;
+					//shutdown_request = strtof(pend2, &pend3);
+					//if(shutdown_request > 0.0) { x_pos=0.0; y_pos=0.0; theta=0.0; }//ResetRobotController(); };
+					Rx_strLength &= 0x0fff;  // reset flag
+					//twist_to_motors();
+				
+					#ifdef TRACE_DEBUG
+						//printf("linear_x=%f, angular_z=%f \r\n", lin_x, ang_z);
+						printf("right=%d, left=%d \r\n", right_desire_rpm, left_desire_rpm);
+					#endif
+				
 			}		
+			
 		// end get desire rpm-------------------------------------------------------------------------------
 }
 
@@ -195,4 +202,14 @@ void ResetRobotController(void)
 }
 
 
+void resetDesireVelocities(void)
+{
+	left_desire_rpm = 0; right_desire_rpm = 0;
+}
+void resetEncoders(void)
+{
+	/* ROS2 CONTROL */
+	global_C_count = 0;	// Motor C
+	global_D_count = 0; // Motor D
+}
 

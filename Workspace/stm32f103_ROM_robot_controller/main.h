@@ -30,6 +30,8 @@ void updateMotor(void);
 void getDesireRPM(void);
 void sampleTimeInit(void);
 void ResetRobotController(void);
+void resetDesireVelocities(void);
+void resetEncoders(void);
 
 // uints meter, radian
 float base_width;
