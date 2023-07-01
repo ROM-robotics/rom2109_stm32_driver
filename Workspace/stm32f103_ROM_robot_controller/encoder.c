@@ -118,6 +118,8 @@ int32_t getMotorD_rpm()
 	return actual_rpm * direction_bit * -1;
 }
 
+
+
 //=============================================================== Encoder Initialize
 void encoderInit(void)
 {

@@ -46,6 +46,7 @@ extern float L_by_2;
 
 extern float pulse_per_50ms_to_rpm;
 extern float meter_per_sec_to_rpm;
+extern float rps_to_rpm_ratio;
 
 extern float gyro_rot_x;
 extern float gyro_rot_y;

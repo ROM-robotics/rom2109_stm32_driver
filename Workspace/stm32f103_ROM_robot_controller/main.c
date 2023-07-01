@@ -105,7 +105,7 @@ void updateMotor(void)
 	 getDesireRPM();
 	
 	 updatePID_right( right_desire_rpm, right_actual_rpm );
-	 updatePID_left( left_desire_rpm, left_actual_rpm );
+	 updatePID_left( left_desire_rpm, left_actual_rpm ); 
 	
 	 sendData();
 }
@@ -113,7 +113,7 @@ void updateMotor(void)
 
 void getDesireRPM(void)
 {
-	left_desire_rpm=0; right_desire_rpm=0;
+	// left_desire_rpm=0; right_desire_rpm=0; // ifi wire disconect , stop robot
 		// get desire rpm-------------------------------------------------------------------------------------
 		
 			if( Rx_strLength > 0xC000) // usart rx DMA flag 
@@ -128,10 +128,10 @@ void getDesireRPM(void)
 						new_str[j] = (char) Received_Rx_Buf[j];
 					}
 					char* pend;
-					char* pend2;
-					char* pend3;
-					left_desire_rpm = (int)( strtof( new_str, &pend) ); 
-					right_desire_rpm = (int) ( strtof( pend, NULL) );
+					//char* pend2;
+					//char* pend3;
+					left_desire_rpm  = (int)( ( (strtof(new_str, &pend)) * rps_to_rpm_ratio ) ); 
+					right_desire_rpm = (int)( ( (strtof( pend, NULL)   ) * rps_to_rpm_ratio ) );
 					//l_speed = (int) l_desire;
 					//r_speed = (int) r_desire;
 					//shutdown_request = strtof(pend2, &pend3);
@@ -149,11 +149,12 @@ void getDesireRPM(void)
 		// end get desire rpm-------------------------------------------------------------------------------
 }
 
+
 void variablesInit(void)
 {
 	//--------------------------------------------
-	pi    = 3.1415926;
-  two_pi= 6.2831853;
+	pi    = 3.141592653;
+  two_pi= 6.283185306;
 	// change for your robot ( uints meter, radian )
 	//base_width       = 0.205;
 	//wheel_diameter   = 0.070;
@@ -182,6 +183,8 @@ void variablesInit(void)
 	
 	//meter_per_sec_to_rpm = 60.0/ (pi * wheel_diameter);
 	
+	// count difference to radian per second 
+	rps_to_rpm_ratio = 9.54929658;
 	/* twist */
   //lin_x = 0.0;
   //ang_z = 0.0;

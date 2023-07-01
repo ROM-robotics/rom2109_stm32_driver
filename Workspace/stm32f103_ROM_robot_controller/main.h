@@ -17,7 +17,6 @@ int32_t left_actual_rpm;
 float pulse_per_50ms_to_rpm;
 float meter_per_sec_to_rpm;
 
-
 /* twist to motors */
 float lin_x;
 float ang_z;
@@ -33,6 +32,7 @@ void ResetRobotController(void);
 void resetDesireVelocities(void);
 void resetEncoders(void);
 
+float rps_to_rpm_ratio;
 // uints meter, radian
 float base_width;
 float wheel_diameter;
