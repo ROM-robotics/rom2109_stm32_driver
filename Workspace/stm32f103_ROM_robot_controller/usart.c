@@ -126,6 +126,13 @@ void USART1_IRQHandler(void)
 		// clear the interrupt flag bit
 		USART_ReceiveData(USART1);																					// it is clearl automatically when calling USART_SendData() or  USART_ReceiveData()
 	} 
+	/*
+	else 
+	{
+		//if(USART_GetITStatus(USART1, USART_IT_ERR) != RESET) { left_desire_rpm = 0; right_desire_rpm = 0; }
+		left_desire_rpm = 0; right_desire_rpm = 0;
+	}
+	*/
 } 	
 
 void Receive_DataPack(void)
