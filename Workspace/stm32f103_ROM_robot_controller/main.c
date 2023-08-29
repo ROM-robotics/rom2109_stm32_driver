@@ -158,10 +158,16 @@ void variablesInit(void)
 	// change for your robot ( uints meter, radian )
 	//base_width       = 0.205;
 	//wheel_diameter   = 0.070;
+	/* rom2109 ppr
 	pulse_per_revolute = 6533;
+	*/
+	
+	/* zwel myat ppr */
+	pulse_per_revolute = 1320;
 	//L_by_2 = base_width/2.0;
 	
 	// tune your pid
+	/* ROM2109 POLOLU MOTORS
 	R_Kp = 25.0;
 	R_Ki = 0.0;
 	R_Kd = 1.8; //2.5
@@ -170,6 +176,26 @@ void variablesInit(void)
 	L_Kp = 28;
 	L_Ki = 0.0001;
 	L_Kd = 1.3;
+	*/
+	
+	/* zwel myat motors 
+	R_Kp = 0.2;
+	R_Ki = 0.0004;
+	R_Kd = 0.882;
+
+
+	L_Kp = 0.2;
+	L_Ki = 0.004;
+	L_Kd = 0.724;
+	*/
+	R_Kp = 0.6;
+	R_Ki = 0.00001;
+	R_Kd = 0.4;
+
+
+	L_Kp = 1.0;
+	L_Ki = 0.00001;
+	L_Kd = 0.0001;
 	//--------------------------------------------
 	
 	// rpm
@@ -184,6 +210,7 @@ void variablesInit(void)
 	//meter_per_sec_to_rpm = 60.0/ (pi * wheel_diameter);
 	
 	// count difference to radian per second 
+	// radian per sec to rpm constant --> 60/2pi
 	rps_to_rpm_ratio = 9.54929658;
 	/* twist */
   //lin_x = 0.0;
