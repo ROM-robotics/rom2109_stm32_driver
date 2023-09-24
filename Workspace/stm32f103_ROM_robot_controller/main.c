@@ -41,17 +41,42 @@ void sendData(void)
 		*/
 	
 	//--------------------------------------------------------------------------------------------
+	/* SENDING ENCODER COUNTS */
 	  int x_len = snprintf( NULL, 0, "%ld", l_ticks);
     char* l_ticks_str = (char*)malloc( x_len+1 );
     snprintf( l_ticks_str, x_len+1, "%ld", l_ticks);
 
 		int y_len = snprintf( NULL, 0, "%ld", r_ticks);
     char* r_ticks_str = (char*)malloc( y_len+1 );
-    snprintf( r_ticks_str, y_len+1, "%ld", r_ticks);
+    snprintf( r_ticks_str, y_len+1, "%ld", r_ticks); 
+	
+	
+	/* TESTING RADIAN PER SECONDS
+	float left_desire_rps = left_desire_rpm / rps_to_rpm_ratio;
+	float right_desire_rps = right_desire_rpm/ rps_to_rpm_ratio;
+	
+	int x_len = snprintf( NULL, 0, "%f", left_desire_rps);
+  char* l_ticks_str = (char*)malloc( x_len+1 );
+  snprintf( l_ticks_str, x_len+1, "%f", left_desire_rps);
 
-			Usart_SendString(USART1, l_ticks_str);
-			Usart_SendString(USART1, " ");
+  int y_len = snprintf( NULL, 0, "%f", right_desire_rps);
+  char* r_ticks_str = (char*)malloc( y_len+1 );
+  snprintf( r_ticks_str, y_len+1, "%f", right_desire_rps);*/
+	
+	/* TESTING RADIAN PER SECONDS 
+	int x_len = snprintf( NULL, 0, "%d", left_actual_rpm);
+  char* l_ticks_str = (char*)malloc( x_len+1 );
+  snprintf( l_ticks_str, x_len+1, "%d", left_actual_rpm);
+
+  int y_len = snprintf( NULL, 0, "%d", right_actual_rpm);
+  char* r_ticks_str = (char*)malloc( y_len+1 );
+  snprintf( r_ticks_str, y_len+1, "%d", right_actual_rpm);  */
+	
+	/*  YOU SHOULD CHECK OVERFLOW */
+
 			Usart_SendString(USART1, r_ticks_str);
+			Usart_SendString(USART1, " ");
+			Usart_SendString(USART1, l_ticks_str);
 			Usart_SendString(USART1, " ");
 			Usart_SendString(USART1, "\r\n");
 
@@ -130,8 +155,8 @@ void getDesireRPM(void)
 					char* pend;
 					//char* pend2;
 					//char* pend3;
-					left_desire_rpm  = (int)( ( (strtof(new_str, &pend)) * rps_to_rpm_ratio ) ); 
-					right_desire_rpm = (int)( ( (strtof( pend, NULL)   ) * rps_to_rpm_ratio ) );
+					right_desire_rpm  = (int)( ( (strtof(new_str, &pend)) * rps_to_rpm_ratio ) ); 
+					left_desire_rpm = (int)( ( (strtof( pend, NULL)   ) * rps_to_rpm_ratio ) );
 					//l_speed = (int) l_desire;
 					//r_speed = (int) r_desire;
 					//shutdown_request = strtof(pend2, &pend3);
@@ -212,6 +237,7 @@ void variablesInit(void)
 	// count difference to radian per second 
 	// radian per sec to rpm constant --> 60/2pi
 	rps_to_rpm_ratio = 9.54929658;
+	//rps_to_rpm_ratio = 1.0;
 	/* twist */
   //lin_x = 0.0;
   //ang_z = 0.0;
