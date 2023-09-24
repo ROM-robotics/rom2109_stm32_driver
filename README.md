@@ -1,4 +1,4 @@
-# libraries_stm32_driver
+# STM32F103 Driver For ROS2 HUMBLE
 ROM2109 ROBOT CONTROLLER
 DEVELOPED BY ROM ROBOTICS MYANMAR
 
@@ -17,16 +17,15 @@ timer5 -> motor D encoder<br>
 timer4 -> motor C encoder<br>
 timer3 -> motor B encoder<br>
 timer2 -> motor A encoder<br>
-# rom2109_stm32_driver
 
-##### computer မှ velocity ပို့ ရင် L R +CR တွဲပို့ပါ။
+#### ROS2 HUMBLE အတွက် CONNECTION 
+##### MCU --> "RIGHT_tick_string LEFT_tick_string \r\n" --> ROBOT COMPUTER 
+###### ( long to char* (string) --> UART SEND STRING --> I DON'T KNOW)
+
+##### ROBOT COMPUTER --> "RIGHT_rps_string LEFT_radian_per_string\r" --> MCU 
+###### ( double to float, float to string --> UART SEND STRING --> (rps)string to float , rps to rpm, float to int  )
 
 
-<a href="https://www.youtube.com/watch?v=qeWIGDeaKrE"> pid tuning လုပ်ရန် </a>
 
-##### ROS2 HUMBLE အတွက် CONNECTION က ဒီလို
-MCU --> "RIGHT_tick_string LEFT_tick_string \r\n" --> ROBOT COMPUTER 
-( long to char* (string) --> UART SEND STRING --> I DON'T KNOW)
-
-ROBOT COMPUTER --> "RIGHT_rps_string LEFT_radian_per_string\r" --> MCU 
-( double to float, float to string --> UART SEND STRING --> (rps)string to float , rps to rpm, float to int  )
+#### PID TUNING
+<a href="https://www.youtube.com/watch?v=qeWIGDeaKrE"> pid tuning video</a>
