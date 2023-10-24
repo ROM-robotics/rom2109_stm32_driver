@@ -129,8 +129,8 @@ void allInitialize(void)
 
 void updateMotor(void)
 {		
-	 left_actual_rpm= getMotorC_rpm(); // left
-	 right_actual_rpm= getMotorD_rpm(); // right
+	 right_actual_rpm= getMotorC_rpm(); // left
+	 left_actual_rpm= getMotorD_rpm(); // right
 	
 	 getDesireRPM2();
 	

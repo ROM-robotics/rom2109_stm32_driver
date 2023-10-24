@@ -69,7 +69,7 @@ int32_t getMotorB_rpm()
 */
 /////////////////////////////////////////////////////////
 
-int32_t getMotorD_rpm()
+int32_t getMotorC_rpm()
 {
 	C_count = TIM4->CNT; 
 	static int32_t C_prev_count=0;
@@ -94,10 +94,10 @@ int32_t getMotorD_rpm()
 	C_prev_count = C_count;
 	//actual_rpm = ( A_count_diff * 10 ) / ( 11 );        // FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr 
 	actual_rpm = C_count_diff * pulse_per_50ms_to_rpm;
-	return actual_rpm * direction_bit ;
+	return (actual_rpm * direction_bit) * -1 ;
 }
 
-int32_t getMotorC_rpm()
+int32_t getMotorD_rpm()
 {
 	D_count = TIM5->CNT; 
 	static int32_t D_prev_count=0;
@@ -122,7 +122,7 @@ int32_t getMotorC_rpm()
 	D_prev_count = D_count;
 	//actual_rpm = ( D_count_diff * 10 ) / ( 11 );        	// FORMULA -> count_diff/50ms x 1000ms/1s x 60s/1m x 1rev/ppr  
 	actual_rpm = D_count_diff * pulse_per_50ms_to_rpm;
-	return actual_rpm * direction_bit ;
+	return (actual_rpm * direction_bit)* -1 ;
 }
 
 
