@@ -194,7 +194,7 @@ void variablesInit(void)
 	*/
 	
 	/* zwel myat ppr */
-	pulse_per_revolute = 1320;
+	pulse_per_revolute = 4060;
 	//L_by_2 = base_width/2.0;
 	
 	// tune your pid
@@ -219,14 +219,14 @@ void variablesInit(void)
 	L_Ki = 0.004;
 	L_Kd = 0.724;
 	*/
-	R_Kp = 0.6;
-	R_Ki = 0.00001;
-	R_Kd = 0.4;
+	R_Kp = 1.0;
+	R_Ki = 0;
+	R_Kd = 0;
 
 
 	L_Kp = 1.0;
-	L_Ki = 0.00001;
-	L_Kd = 0.0001;
+	L_Ki = 0;
+	L_Kd = 0;
 	//--------------------------------------------
 	
 	// rpm
