@@ -113,7 +113,7 @@ void updateMotor(void)
 
 void getDesireRPM(void)
 {
-	left_desire_rpm=0; right_desire_rpm=0;
+	//left_desire_rpm=0; right_desire_rpm=0;
 		// get desire rpm-------------------------------------------------------------------------------------
 		
 			if( Rx_strLength > 0xC000) // usart rx DMA flag 
